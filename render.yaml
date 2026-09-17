@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: inaivu
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app

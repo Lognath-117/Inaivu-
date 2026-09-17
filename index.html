@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>INAIVU | Government Service Assistant</title>
+
+<link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<div class="logo-icon">I</div>
+
+<div>
+
+<h2>INAIVU</h2>
+
+<p>Government Service Assistant</p>
+
+</div>
+
+</div>
+
+<div>
+
+<button onclick="toggleLanguage()" id="languageBtn">
+தமிழ்
+</button>
+
+<button onclick="startVoice()">
+🎙 Voice
+</button>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<p class="small-title">
+ONE PLATFORM • MANY SERVICES
+</p>
+
+<h1 id="mainTitle">
+Government services,<br>
+made simpler.
+</h1>
+
+<p id="mainDescription">
+
+Tell INAIVU what you need.
+
+Find the relevant government service,
+understand the process and visit the
+official government portal.
+
+</p>
+
+<div class="features">
+
+<span>✓ Official Links</span>
+
+<span>✓ Simple Guidance</span>
+
+<span>✓ Voice Search</span>
+
+</div>
+
+</div>
+
+
+<div class="search-panel">
+
+<h3 id="question">
+What government service do you need?
+</h3>
+
+<div class="search-box">
+
+<input
+id="searchInput"
+placeholder="Example: I need a driving licence">
+
+<button onclick="startVoice()">
+🎙
+</button>
+
+<button
+class="search-button"
+onclick="searchServices()">
+
+Search
+
+</button>
+
+</div>
+
+<p id="voiceStatus">
+You can type or speak your requirement.
+</p>
+
+
+<div class="quick">
+
+<button onclick="quickSearch('driving licence')">
+Driving Licence
+</button>
+
+<button onclick="quickSearch('aadhaar')">
+Aadhaar
+</button>
+
+<button onclick="quickSearch('scholarship')">
+Scholarship
+</button>
+
+<button onclick="quickSearch('ration card')">
+Ration Card
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="services-section">
+
+<div class="service-heading">
+
+<div>
+
+<p class="small-title">
+SERVICE DIRECTORY
+</p>
+
+<h2>
+Explore Government Services
+</h2>
+
+</div>
+
+<select
+id="category"
+onchange="searchServices()">
+
+<option>All</option>
+
+</select>
+
+</div>
+
+
+<div
+id="services"
+class="service-grid">
+
+</div>
+
+<div
+id="noResults"
+class="no-results">
+
+<h3>No services found</h3>
+
+<p>
+Try searching for Aadhaar, PAN,
+licence, passport or scholarship.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="how">
+
+<p class="small-title">
+HOW INAIVU WORKS
+</p>
+
+<h2>
+Three Simple Steps
+</h2>
+
+
+<div class="steps">
+
+<div>
+
+<span>01</span>
+
+<h3>Tell Your Need</h3>
+
+<p>
+Type or speak the government
+service you are looking for.
+</p>
+
+</div>
+
+
+<div>
+
+<span>02</span>
+
+<h3>Get Guidance</h3>
+
+<p>
+INAIVU shows the documents
+and steps required.
+</p>
+
+</div>
+
+
+<div>
+
+<span>03</span>
+
+<h3>Visit Official Portal</h3>
+
+<p>
+Continue through the official
+government website.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div
+id="modal"
+class="modal">
+
+<div class="modal-content">
+
+<button
+class="close"
+onclick="closeModal()">
+
+×
+
+</button>
+
+<p
+id="modalCategory"
+class="category-label">
+
+</p>
+
+<h2 id="modalTitle"></h2>
+
+<p
+id="modalDescription"
+class="description">
+
+</p>
+
+
+<div class="modal-grid">
+
+<div>
+
+<h3>
+Required Documents
+</h3>
+
+<ul id="documents"></ul>
+
+</div>
+
+
+<div>
+
+<h3>
+Application Steps
+</h3>
+
+<ol id="steps"></ol>
+
+</div>
+
+</div>
+
+
+<div class="modal-buttons">
+
+<a
+id="officialLink"
+target="_blank">
+
+Open Official Website ↗
+
+</a>
+
+<button onclick="speakService()">
+🔊 Read Aloud
+</button>
+
+<button onclick="shareService()">
+Share
+</button>
+
+</div>
+
+
+<p class="warning">
+
+Government requirements may change.
+Always verify the latest information
+on the official website.
+
+</p>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<strong>INAIVU</strong>
+
+<p>
+Government Service Assistant
+</p>
+
+</footer>
+
+
+<script src="/script.js"></script>
+
+</body>
+
+</html>

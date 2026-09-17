@@ -1,37 +1,95 @@
 let services = [];
+
 let currentService = null;
+
 let tamilMode = false;
 
 
+/* ================= LOAD DATA ================= */
+
 async function loadServices() {
 
-    const response =
-        await fetch("/api/services");
+    try {
 
-    services =
-        await response.json();
+        const response =
+            await fetch("./services.json");
 
-    displayServices(services);
+        if (!response.ok) {
 
-    loadCategories();
+            throw new Error(
+                "services.json not found"
+            );
+
+        }
+
+        services =
+            await response.json();
+
+        loadCategories();
+
+        displayServices(services);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById("servicesGrid")
+            .innerHTML = `
+                <div class="empty-state"
+                     style="display:block;grid-column:1/-1">
+
+                    <h3>
+                        Unable to load services
+                    </h3>
+
+                    <p>
+                        Make sure services.json
+                        is uploaded in the repository root.
+                    </p>
+
+                </div>
+            `;
+
+    }
+
 }
 
 
-async function loadCategories() {
+/* ================= CATEGORIES ================= */
 
-    const response =
-        await fetch("/api/categories");
-
-    const categories =
-        await response.json();
+function loadCategories() {
 
     const select =
-        document.getElementById("category");
+        document.getElementById(
+            "categorySelect"
+        );
+
+    const categories = [
+        ...new Set(
+            services.map(
+                service => service.category
+            )
+        )
+    ];
+
+    categories.sort();
+
+    select.innerHTML =
+        `<option value="All">
+            All Services
+        </option>`;
+
 
     categories.forEach(category => {
 
         const option =
             document.createElement("option");
+
+        option.value =
+            category;
 
         option.textContent =
             category;
@@ -39,29 +97,76 @@ async function loadCategories() {
         select.appendChild(option);
 
     });
+
 }
 
 
+/* ================= ICONS ================= */
+
+function getIcon(category) {
+
+    const icons = {
+
+        "Identity": "🪪",
+
+        "Travel": "🛂",
+
+        "Transport": "🚗",
+
+        "Elections": "🗳️",
+
+        "Certificates": "📄",
+
+        "Education": "🎓",
+
+        "Employment": "💼",
+
+        "Agriculture": "🌾",
+
+        "Finance": "₹",
+
+        "Tamil Nadu": "🏛️",
+
+        "Food & Civil Supplies": "🍚",
+
+        "Utilities": "⚡"
+
+    };
+
+    return icons[category] || "🏛️";
+
+}
+
+
+/* ================= DISPLAY SERVICES ================= */
+
 function displayServices(data) {
 
-    const container =
-        document.getElementById("services");
+    const grid =
+        document.getElementById(
+            "servicesGrid"
+        );
 
-    const noResults =
-        document.getElementById("noResults");
+    const empty =
+        document.getElementById(
+            "emptyState"
+        );
 
-    container.innerHTML = "";
+
+    grid.innerHTML = "";
+
 
     if (data.length === 0) {
 
-        noResults.style.display =
+        empty.style.display =
             "block";
 
         return;
 
     }
 
-    noResults.style.display =
+
+    empty.style.display =
         "none";
 
 
@@ -73,148 +178,262 @@ function displayServices(data) {
         card.className =
             "service-card";
 
+
         card.innerHTML = `
 
-        <p class="category-label">
-        ${service.category}
-        </p>
+            <div class="card-top">
 
-        <h3>
-        ${service.name}
-        </h3>
+                <span class="category">
+                    ${escapeHTML(service.category)}
+                </span>
 
-        <p>
-        ${service.description}
-        </p>
+                <span class="service-icon">
+                    ${getIcon(service.category)}
+                </span>
 
-        <p class="view">
-        View Guidance →
-        </p>
+            </div>
+
+            <h3>
+                ${escapeHTML(service.name)}
+            </h3>
+
+            <p>
+                ${escapeHTML(service.description)}
+            </p>
+
+            <div class="view-link">
+                View Guidance →
+            </div>
 
         `;
 
-        card.onclick =
-            () => openService(service.id);
 
-        container.appendChild(card);
+        card.addEventListener(
+            "click",
+            () => openService(service.id)
+        );
+
+
+        grid.appendChild(card);
 
     });
 
 }
 
 
-async function searchServices() {
+/* ================= SEARCH ================= */
 
-    const query =
-        document
-        .getElementById("searchInput")
-        .value;
+function searchServices() {
 
-    const category =
-        document
-        .getElementById("category")
-        .value;
-
-    const response =
-        await fetch(
-            `/api/search?q=${encodeURIComponent(query)}&category=${encodeURIComponent(category)}`
+    const input =
+        document.getElementById(
+            "searchInput"
         );
 
-    const results =
-        await response.json();
+
+    const query =
+        input.value
+            .toLowerCase()
+            .trim();
+
+
+    const category =
+        document.getElementById(
+            "categorySelect"
+        ).value;
+
+
+    let results =
+        services.filter(service => {
+
+            if (
+                category !== "All" &&
+                service.category !== category
+            ) {
+
+                return false;
+
+            }
+
+
+            if (!query) {
+
+                return true;
+
+            }
+
+
+            const searchableText = [
+
+                service.name,
+
+                service.category,
+
+                service.description,
+
+                ...service.keywords
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+            return searchableText
+                .includes(query);
+
+        });
+
 
     displayServices(results);
 
 }
 
 
+/* ================= QUICK SEARCH ================= */
+
 function quickSearch(query) {
 
     document
-    .getElementById("searchInput")
-    .value = query;
+        .getElementById("searchInput")
+        .value = query;
 
     searchServices();
 
 }
 
 
-async function openService(id) {
+/* ================= OPEN SERVICE ================= */
 
-    const response =
-        await fetch(
-            `/api/service/${id}`
-        );
+function openService(id) {
 
     const service =
-        await response.json();
+        services.find(
+            item => item.id === id
+        );
+
+
+    if (!service) {
+
+        return;
+
+    }
+
 
     currentService =
         service;
 
-    document
-    .getElementById("modalCategory")
-    .textContent =
-        service.category;
 
     document
-    .getElementById("modalTitle")
-    .textContent =
-        service.name;
-
-    document
-    .getElementById("modalDescription")
-    .textContent =
-        service.description;
+        .getElementById("modalCategory")
+        .textContent =
+            service.category;
 
 
     document
-    .getElementById("documents")
-    .innerHTML =
-        service.documents
-        .map(
-            document =>
-            `<li>${document}</li>`
-        )
-        .join("");
+        .getElementById("modalTitle")
+        .textContent =
+            service.name;
 
 
     document
-    .getElementById("steps")
-    .innerHTML =
-        service.steps
-        .map(
-            step =>
-            `<li>${step}</li>`
-        )
-        .join("");
+        .getElementById("modalDescription")
+        .textContent =
+            service.description;
+
+
+    const documents =
+        document.getElementById(
+            "documentsList"
+        );
+
+
+    documents.innerHTML = "";
+
+
+    service.documents.forEach(
+        documentItem => {
+
+            const li =
+                document.createElement("li");
+
+            li.textContent =
+                documentItem;
+
+            documents.appendChild(li);
+
+        }
+    );
+
+
+    const steps =
+        document.getElementById(
+            "stepsList"
+        );
+
+
+    steps.innerHTML = "";
+
+
+    service.steps.forEach(
+        step => {
+
+            const li =
+                document.createElement("li");
+
+            li.textContent =
+                step;
+
+            steps.appendChild(li);
+
+        }
+    );
 
 
     document
-    .getElementById("officialLink")
-    .href =
-        service.official_url;
+        .getElementById("officialLink")
+        .href =
+            service.official_url;
 
 
     document
-    .getElementById("modal")
-    .style.display =
-        "flex";
+        .getElementById("serviceModal")
+        .classList
+        .add("show");
+
+
+    document.body.style.overflow =
+        "hidden";
 
 }
 
+
+/* ================= CLOSE MODAL ================= */
 
 function closeModal() {
 
     document
-    .getElementById("modal")
-    .style.display =
-        "none";
+        .getElementById("serviceModal")
+        .classList
+        .remove("show");
 
-    speechSynthesis.cancel();
+
+    document.body.style.overflow =
+        "";
+
+
+    if (
+        "speechSynthesis"
+        in window
+    ) {
+
+        speechSynthesis.cancel();
+
+    }
 
 }
 
+
+/* ================= VOICE ================= */
 
 function startVoice() {
 
@@ -226,9 +445,9 @@ function startVoice() {
     if (!Recognition) {
 
         document
-        .getElementById("voiceStatus")
-        .textContent =
-            "Voice recognition is not supported by this browser.";
+            .getElementById("voiceStatus")
+            .textContent =
+                "Voice search is not supported. Try Google Chrome.";
 
         return;
 
@@ -249,47 +468,59 @@ function startVoice() {
         false;
 
 
+    recognition.maxAlternatives =
+        1;
+
+
     document
-    .getElementById("voiceStatus")
-    .textContent =
-        "Listening...";
+        .getElementById("voiceStatus")
+        .textContent =
+            tamilMode
+            ? "கேட்கிறேன்..."
+            : "Listening...";
 
 
     recognition.onresult =
         function(event) {
 
-        const text =
-            event
-            .results[0][0]
-            .transcript;
+            const text =
+                event
+                    .results[0][0]
+                    .transcript;
 
 
-        document
-        .getElementById("searchInput")
-        .value =
-            text;
+            document
+                .getElementById(
+                    "searchInput"
+                )
+                .value =
+                    text;
 
 
-        document
-        .getElementById("voiceStatus")
-        .textContent =
-            "You said: " + text;
+            document
+                .getElementById(
+                    "voiceStatus"
+                )
+                .textContent =
+                    "You said: " + text;
 
 
-        searchServices();
+            searchServices();
 
-    };
+        };
 
 
     recognition.onerror =
         function() {
 
-        document
-        .getElementById("voiceStatus")
-        .textContent =
-            "Voice recognition stopped.";
+            document
+                .getElementById(
+                    "voiceStatus"
+                )
+                .textContent =
+                    "Voice recognition stopped.";
 
-    };
+        };
 
 
     recognition.start();
@@ -297,31 +528,49 @@ function startVoice() {
 }
 
 
+/* ================= TEXT TO SPEECH ================= */
+
 function speakService() {
 
-    if (!currentService)
+    if (!currentService) {
+
         return;
 
+    }
 
-    let text =
 
-        currentService.name +
+    if (!("speechSynthesis" in window)) {
+
+        return;
+
+    }
+
+
+    const service =
+        currentService;
+
+
+    const text =
+
+        service.name +
 
         ". " +
 
-        currentService.description +
+        service.description +
 
         ". Required documents. " +
 
-        currentService.documents.join(". ") +
+        service.documents.join(". ") +
 
         ". Application steps. " +
 
-        currentService.steps.join(". ");
+        service.steps.join(". ");
 
 
     const speech =
-        new SpeechSynthesisUtterance(text);
+        new SpeechSynthesisUtterance(
+            text
+        );
 
 
     speech.lang =
@@ -330,67 +579,110 @@ function speakService() {
         : "en-IN";
 
 
+    speech.rate =
+        0.95;
+
+
     speechSynthesis.cancel();
 
-    speechSynthesis.speak(speech);
+    speechSynthesis.speak(
+        speech
+    );
 
 }
 
 
+/* ================= SHARE ================= */
+
 async function shareService() {
 
-    if (!currentService)
+    if (!currentService) {
+
         return;
+
+    }
+
+
+    const service =
+        currentService;
 
 
     const text =
 
 `INAIVU
 
-${currentService.name}
+${service.name}
 
-${currentService.description}
+${service.description}
 
-Steps:
+Application Steps:
 
-${currentService.steps
-.map((step,index)=>
-`${index+1}. ${step}`)
-.join("\n")}
+${service.steps
+    .map(
+        (step, index) =>
+            `${index + 1}. ${step}`
+    )
+    .join("\n")}
 
 Official Website:
 
-${currentService.official_url}`;
+${service.official_url}`;
 
 
     if (navigator.share) {
 
-        await navigator.share({
+        try {
 
-            title:
-            "INAIVU - " +
-            currentService.name,
+            await navigator.share({
 
-            text: text
+                title:
+                    "INAIVU - " +
+                    service.name,
 
-        });
+                text:
+                    text
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Share cancelled"
+            );
+
+        }
 
     }
 
     else {
 
-        await navigator
-        .clipboard
-        .writeText(text);
+        try {
 
-        alert(
-            "Service information copied."
-        );
+            await navigator.clipboard
+                .writeText(text);
+
+            alert(
+                "Service information copied."
+            );
+
+        }
+
+        catch {
+
+            alert(
+                "Unable to copy information."
+            );
+
+        }
 
     }
 
 }
 
+
+/* ================= LANGUAGE ================= */
 
 function toggleLanguage() {
 
@@ -398,84 +690,280 @@ function toggleLanguage() {
         !tamilMode;
 
 
-    document
-    .getElementById("languageBtn")
-    .textContent =
+    const languageButton =
+        document.getElementById(
+            "languageButton"
+        );
+
+
+    languageButton.textContent =
         tamilMode
         ? "English"
         : "தமிழ்";
 
 
-    document
-    .getElementById("mainTitle")
-    .innerHTML =
-        tamilMode
-        ? "அரசு சேவைகளை<br>எளிதாகப் பெறுங்கள்."
-        : "Government services,<br>made simpler.";
+    if (tamilMode) {
+
+        document
+            .getElementById(
+                "heroTitle"
+            )
+            .innerHTML =
+                "அரசு சேவைகளை,<br>எளிதாகப் பெறுங்கள்.";
 
 
-    document
-    .getElementById("mainDescription")
-    .textContent =
-        tamilMode
-
-        ? "உங்களுக்கு தேவையான அரசு சேவையை INAIVU மூலம் எளிதாக கண்டறியுங்கள்."
-
-        : "Tell INAIVU what you need. Find the relevant government service, understand the process and visit the official government portal.";
+        document
+            .getElementById(
+                "heroDescription"
+            )
+            .textContent =
+                "உங்களுக்கு தேவையான அரசு சேவையை INAIVU மூலம் எளிதாக கண்டறிந்து, வழிமுறைகளைப் புரிந்துகொண்டு அதிகாரப்பூர்வ இணையதளத்தை அணுகுங்கள்.";
 
 
-    document
-    .getElementById("question")
-    .textContent =
-        tamilMode
-
-        ? "உங்களுக்கு எந்த அரசு சேவை தேவை?"
-
-        : "What government service do you need?";
+        document
+            .getElementById(
+                "searchQuestion"
+            )
+            .textContent =
+                "உங்களுக்கு எந்த அரசு சேவை தேவை?";
 
 
-    document
-    .getElementById("searchInput")
-    .placeholder =
-        tamilMode
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .placeholder =
+                "உதாரணம்: ஓட்டுநர் உரிமம் வேண்டும்";
 
-        ? "உதாரணம்: ஓட்டுநர் உரிமம் வேண்டும்"
 
-        : "Example: I need a driving licence";
+        document
+            .getElementById(
+                "voiceStatus"
+            )
+            .textContent =
+                "உங்கள் தேவையை type செய்யலாம் அல்லது பேசலாம்.";
+
+    }
+
+    else {
+
+        document
+            .getElementById(
+                "heroTitle"
+            )
+            .innerHTML =
+                "Government services,<br>made simpler.";
+
+
+        document
+            .getElementById(
+                "heroDescription"
+            )
+            .textContent =
+                "Tell Inaivu what you need. Find the relevant government service, understand the process and visit the official government portal.";
+
+
+        document
+            .getElementById(
+                "searchQuestion"
+            )
+            .textContent =
+                "What government service do you need?";
+
+
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .placeholder =
+                "Example: I need a driving licence";
+
+
+        document
+            .getElementById(
+                "voiceStatus"
+            )
+            .textContent =
+                "You can type or speak your requirement.";
+
+    }
 
 }
 
 
+/* ================= HTML SECURITY ================= */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(
+            /[&<>"']/g,
+            function(character) {
+
+                const entities = {
+
+                    "&": "&amp;",
+
+                    "<": "&lt;",
+
+                    ">": "&gt;",
+
+                    '"': "&quot;",
+
+                    "'": "&#039;"
+
+                };
+
+                return entities[
+                    character
+                ];
+
+            }
+        );
+
+}
+
+
+/* ================= EVENTS ================= */
+
 document
-.getElementById("searchInput")
-.addEventListener(
-    "keydown",
-    function(event) {
+    .getElementById("searchButton")
+    .addEventListener(
+        "click",
+        searchServices
+    );
 
-        if (event.key === "Enter") {
 
-            searchServices();
+document
+    .getElementById("micButton")
+    .addEventListener(
+        "click",
+        startVoice
+    );
+
+
+document
+    .getElementById("topVoiceButton")
+    .addEventListener(
+        "click",
+        startVoice
+    );
+
+
+document
+    .getElementById("languageButton")
+    .addEventListener(
+        "click",
+        toggleLanguage
+    );
+
+
+document
+    .getElementById("categorySelect")
+    .addEventListener(
+        "change",
+        searchServices
+    );
+
+
+document
+    .getElementById("allServicesButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            document
+                .getElementById(
+                    "searchInput"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "categorySelect"
+                )
+                .value = "All";
+
+
+            displayServices(
+                services
+            );
 
         }
-
-    }
-);
+    );
 
 
-window.onclick =
-    function(event) {
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-    const modal =
-        document
-        .getElementById("modal");
+            if (
+                event.key === "Enter"
+            ) {
 
-    if (event.target === modal) {
+                searchServices();
 
-        closeModal();
+            }
 
-    }
+        }
+    );
 
-};
 
+document
+    .querySelectorAll(
+        ".quick-search button"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                quickSearch(
+                    this.dataset.query
+                );
+
+            }
+        );
+
+    });
+
+
+document
+    .getElementById("closeButton")
+    .addEventListener(
+        "click",
+        closeModal
+    );
+
+
+document
+    .getElementById("modalOverlay")
+    .addEventListener(
+        "click",
+        closeModal
+    );
+
+
+document
+    .getElementById("speakButton")
+    .addEventListener(
+        "click",
+        speakService
+    );
+
+
+document
+    .getElementById("shareButton")
+    .addEventListener(
+        "click",
+        shareService
+    );
+
+
+/* ================= START ================= */
 
 loadServices();

@@ -1,314 +1,314 @@
 [
-  {
-    "id": 1,
-    "name": "Aadhaar Services",
-    "category": "Identity",
-    "description": "Aadhaar enrolment, update and related UIDAI services.",
-    "keywords": [
-      "aadhaar",
-      "aadhar",
-      "uidai",
-      "identity",
-      "aadhaar update"
-    ],
-    "documents": [
-      "Identity document as applicable",
-      "Address document as applicable"
-    ],
-    "steps": [
-      "Visit the official UIDAI portal.",
-      "Choose the required Aadhaar service.",
-      "Enter the required details.",
-      "Complete verification or appointment if required."
-    ],
-    "official_url": "https://uidai.gov.in/"
-  },
+    {
+        "id": 1,
+        "name": "Aadhaar Services",
+        "category": "Identity",
+        "description": "Access Aadhaar enrolment, update and related UIDAI services.",
+        "keywords": [
+            "aadhaar",
+            "aadhar",
+            "uidai",
+            "identity",
+            "aadhaar update"
+        ],
+        "documents": [
+            "Identity proof as applicable",
+            "Address proof as applicable"
+        ],
+        "steps": [
+            "Visit the official UIDAI website.",
+            "Choose the required Aadhaar service.",
+            "Enter the required details.",
+            "Complete verification or appointment if required."
+        ],
+        "official_url": "https://uidai.gov.in/"
+    },
 
-  {
-    "id": 2,
-    "name": "PAN Card",
-    "category": "Identity",
-    "description": "PAN application and related taxpayer services.",
-    "keywords": [
-      "pan",
-      "pan card",
-      "income tax",
-      "permanent account number"
-    ],
-    "documents": [
-      "Proof of identity",
-      "Proof of address",
-      "Proof of date of birth"
-    ],
-    "steps": [
-      "Open the official Income Tax portal.",
-      "Select the appropriate PAN related service.",
-      "Provide the requested information.",
-      "Complete verification as instructed."
-    ],
-    "official_url": "https://www.incometax.gov.in/"
-  },
+    {
+        "id": 2,
+        "name": "PAN Card",
+        "category": "Identity",
+        "description": "Access PAN application and related income tax services.",
+        "keywords": [
+            "pan",
+            "pan card",
+            "income tax",
+            "permanent account number"
+        ],
+        "documents": [
+            "Proof of identity",
+            "Proof of address",
+            "Proof of date of birth"
+        ],
+        "steps": [
+            "Open the official Income Tax portal.",
+            "Select the appropriate PAN service.",
+            "Enter the required information.",
+            "Complete verification as instructed."
+        ],
+        "official_url": "https://www.incometax.gov.in/"
+    },
 
-  {
-    "id": 3,
-    "name": "Driving Licence",
-    "category": "Transport",
-    "description": "Learner licence and driving licence related services.",
-    "keywords": [
-      "driving licence",
-      "driving license",
-      "licence",
-      "license",
-      "dl",
-      "rto"
-    ],
-    "documents": [
-      "Age proof",
-      "Address proof",
-      "Identity proof"
-    ],
-    "steps": [
-      "Visit the official Parivahan portal.",
-      "Choose Driving Licence Related Services.",
-      "Select your state.",
-      "Choose the required licence service.",
-      "Complete the application and appointment or test process."
-    ],
-    "official_url": "https://parivahan.gov.in/"
-  },
+    {
+        "id": 3,
+        "name": "Driving Licence",
+        "category": "Transport",
+        "description": "Access learner licence and driving licence related services.",
+        "keywords": [
+            "driving licence",
+            "driving license",
+            "licence",
+            "license",
+            "dl",
+            "rto"
+        ],
+        "documents": [
+            "Age proof",
+            "Address proof",
+            "Identity proof"
+        ],
+        "steps": [
+            "Visit the official Parivahan portal.",
+            "Choose Driving Licence Related Services.",
+            "Select your state.",
+            "Choose the required licence service.",
+            "Complete the application and appointment or test process."
+        ],
+        "official_url": "https://parivahan.gov.in/"
+    },
 
-  {
-    "id": 4,
-    "name": "Passport",
-    "category": "Travel",
-    "description": "Passport application, renewal and appointment services.",
-    "keywords": [
-      "passport",
-      "passport seva",
-      "new passport",
-      "renew passport"
-    ],
-    "documents": [
-      "Address proof",
-      "Date of birth proof",
-      "Supporting documents requested by Passport Seva"
-    ],
-    "steps": [
-      "Open Passport Seva.",
-      "Create an account or login.",
-      "Choose the required passport service.",
-      "Complete the application.",
-      "Schedule an appointment.",
-      "Attend the appointment with required documents."
-    ],
-    "official_url": "https://www.passportindia.gov.in/"
-  },
+    {
+        "id": 4,
+        "name": "Passport",
+        "category": "Travel",
+        "description": "Passport application, renewal and appointment services.",
+        "keywords": [
+            "passport",
+            "passport seva",
+            "new passport",
+            "renew passport"
+        ],
+        "documents": [
+            "Address proof",
+            "Date of birth proof",
+            "Supporting documents requested by Passport Seva"
+        ],
+        "steps": [
+            "Open the Passport Seva website.",
+            "Create an account or login.",
+            "Choose the required passport service.",
+            "Complete the application.",
+            "Schedule an appointment.",
+            "Attend the appointment with the required documents."
+        ],
+        "official_url": "https://www.passportindia.gov.in/"
+    },
 
-  {
-    "id": 5,
-    "name": "Ration Card Services",
-    "category": "Food & Civil Supplies",
-    "description": "Tamil Nadu ration card and public distribution services.",
-    "keywords": [
-      "ration",
-      "ration card",
-      "smart card",
-      "food card",
-      "pds"
-    ],
-    "documents": [
-      "Identity proof",
-      "Address proof",
-      "Family information"
-    ],
-    "steps": [
-      "Visit the Tamil Nadu Public Distribution System portal.",
-      "Choose the required smart card service.",
-      "Enter the required information.",
-      "Upload supporting documents if requested.",
-      "Submit the application."
-    ],
-    "official_url": "https://www.tnpds.gov.in/"
-  },
+    {
+        "id": 5,
+        "name": "Ration Card Services",
+        "category": "Food & Civil Supplies",
+        "description": "Access Tamil Nadu ration card and public distribution services.",
+        "keywords": [
+            "ration",
+            "ration card",
+            "smart card",
+            "food card",
+            "pds"
+        ],
+        "documents": [
+            "Identity proof",
+            "Address proof",
+            "Family information"
+        ],
+        "steps": [
+            "Visit the Tamil Nadu Public Distribution System portal.",
+            "Choose the required smart card service.",
+            "Enter the required information.",
+            "Upload supporting documents if requested.",
+            "Submit the application."
+        ],
+        "official_url": "https://www.tnpds.gov.in/"
+    },
 
-  {
-    "id": 6,
-    "name": "Community Certificate",
-    "category": "Certificates",
-    "description": "Guidance for community certificate services in Tamil Nadu.",
-    "keywords": [
-      "community",
-      "community certificate",
-      "caste",
-      "caste certificate"
-    ],
-    "documents": [
-      "Identity proof",
-      "Address proof",
-      "Supporting community documents as applicable"
-    ],
-    "steps": [
-      "Visit the Tamil Nadu e-Sevai portal.",
-      "Choose the Community Certificate service.",
-      "Enter applicant details.",
-      "Upload the required documents.",
-      "Submit and track the application."
-    ],
-    "official_url": "https://www.tnesevai.tn.gov.in/"
-  },
+    {
+        "id": 6,
+        "name": "Community Certificate",
+        "category": "Certificates",
+        "description": "Guidance for community certificate services in Tamil Nadu.",
+        "keywords": [
+            "community",
+            "community certificate",
+            "caste",
+            "caste certificate"
+        ],
+        "documents": [
+            "Identity proof",
+            "Address proof",
+            "Supporting community documents as applicable"
+        ],
+        "steps": [
+            "Visit the Tamil Nadu e-Sevai portal.",
+            "Choose the Community Certificate service.",
+            "Enter applicant details.",
+            "Upload the required documents.",
+            "Submit and track the application."
+        ],
+        "official_url": "https://www.tnesevai.tn.gov.in/"
+    },
 
-  {
-    "id": 7,
-    "name": "Income Certificate",
-    "category": "Certificates",
-    "description": "Apply for income certificate related services.",
-    "keywords": [
-      "income",
-      "income certificate",
-      "revenue certificate"
-    ],
-    "documents": [
-      "Identity proof",
-      "Address proof",
-      "Income related supporting documents"
-    ],
-    "steps": [
-      "Visit Tamil Nadu e-Sevai.",
-      "Select Income Certificate.",
-      "Enter applicant and income information.",
-      "Upload required documents.",
-      "Submit the application."
-    ],
-    "official_url": "https://www.tnesevai.tn.gov.in/"
-  },
+    {
+        "id": 7,
+        "name": "Income Certificate",
+        "category": "Certificates",
+        "description": "Apply for income certificate related government services.",
+        "keywords": [
+            "income",
+            "income certificate",
+            "revenue certificate"
+        ],
+        "documents": [
+            "Identity proof",
+            "Address proof",
+            "Income related supporting documents"
+        ],
+        "steps": [
+            "Visit the Tamil Nadu e-Sevai portal.",
+            "Select Income Certificate.",
+            "Enter applicant and income information.",
+            "Upload required documents.",
+            "Submit the application."
+        ],
+        "official_url": "https://www.tnesevai.tn.gov.in/"
+    },
 
-  {
-    "id": 8,
-    "name": "Scholarship Services",
-    "category": "Education",
-    "description": "Find and access government scholarship schemes.",
-    "keywords": [
-      "scholarship",
-      "student",
-      "education",
-      "nsp",
-      "student scholarship"
-    ],
-    "documents": [
-      "Student identification",
-      "Academic records",
-      "Bank details",
-      "Scheme-specific documents"
-    ],
-    "steps": [
-      "Visit the National Scholarship Portal.",
-      "Register or login.",
-      "Check available scholarship schemes.",
-      "Verify eligibility.",
-      "Complete and submit the application."
-    ],
-    "official_url": "https://scholarships.gov.in/"
-  },
+    {
+        "id": 8,
+        "name": "Scholarship Services",
+        "category": "Education",
+        "description": "Find and access government scholarship schemes.",
+        "keywords": [
+            "scholarship",
+            "student",
+            "education",
+            "nsp",
+            "student scholarship"
+        ],
+        "documents": [
+            "Student identification",
+            "Academic records",
+            "Bank details",
+            "Scheme-specific documents"
+        ],
+        "steps": [
+            "Visit the National Scholarship Portal.",
+            "Register or login.",
+            "Check available scholarship schemes.",
+            "Verify eligibility.",
+            "Complete and submit the application."
+        ],
+        "official_url": "https://scholarships.gov.in/"
+    },
 
-  {
-    "id": 9,
-    "name": "Voter Services",
-    "category": "Elections",
-    "description": "Voter registration, corrections and electoral roll services.",
-    "keywords": [
-      "voter",
-      "voter id",
-      "epic",
-      "election",
-      "electoral"
-    ],
-    "documents": [
-      "Age proof",
-      "Address proof",
-      "Photograph or other documents where required"
-    ],
-    "steps": [
-      "Visit the official Voters' Service Portal.",
-      "Choose the required voter service.",
-      "Enter the requested information.",
-      "Upload supporting documents.",
-      "Submit and track the request."
-    ],
-    "official_url": "https://voters.eci.gov.in/"
-  },
+    {
+        "id": 9,
+        "name": "Voter Services",
+        "category": "Elections",
+        "description": "Voter registration, correction and electoral services.",
+        "keywords": [
+            "voter",
+            "voter id",
+            "epic",
+            "election",
+            "electoral"
+        ],
+        "documents": [
+            "Age proof",
+            "Address proof",
+            "Photograph or other documents where required"
+        ],
+        "steps": [
+            "Visit the official Voters' Service Portal.",
+            "Choose the required voter service.",
+            "Enter the requested information.",
+            "Upload supporting documents.",
+            "Submit and track the request."
+        ],
+        "official_url": "https://voters.eci.gov.in/"
+    },
 
-  {
-    "id": 10,
-    "name": "EPFO Services",
-    "category": "Employment",
-    "description": "Provident fund and UAN related employee services.",
-    "keywords": [
-      "pf",
-      "epfo",
-      "uan",
-      "provident fund",
-      "employee"
-    ],
-    "documents": [
-      "UAN or account information",
-      "Identity information",
-      "Employment details as applicable"
-    ],
-    "steps": [
-      "Visit the official EPFO portal.",
-      "Choose the required employee service.",
-      "Login or authenticate when required.",
-      "Follow the instructions for the selected service."
-    ],
-    "official_url": "https://www.epfindia.gov.in/"
-  },
+    {
+        "id": 10,
+        "name": "EPFO Services",
+        "category": "Employment",
+        "description": "Provident fund and UAN related employee services.",
+        "keywords": [
+            "pf",
+            "epfo",
+            "uan",
+            "provident fund",
+            "employee"
+        ],
+        "documents": [
+            "UAN or account information",
+            "Identity information",
+            "Employment details as applicable"
+        ],
+        "steps": [
+            "Visit the official EPFO portal.",
+            "Choose the required employee service.",
+            "Login or authenticate when required.",
+            "Follow the instructions for the selected service."
+        ],
+        "official_url": "https://www.epfindia.gov.in/"
+    },
 
-  {
-    "id": 11,
-    "name": "PM Kisan",
-    "category": "Agriculture",
-    "description": "PM-KISAN farmer registration and beneficiary services.",
-    "keywords": [
-      "farmer",
-      "kisan",
-      "pm kisan",
-      "agriculture"
-    ],
-    "documents": [
-      "Identity information",
-      "Farmer or land details",
-      "Bank details as applicable"
-    ],
-    "steps": [
-      "Visit the official PM-KISAN portal.",
-      "Choose the required farmer service.",
-      "Enter the requested details.",
-      "Submit or check beneficiary status."
-    ],
-    "official_url": "https://pmkisan.gov.in/"
-  },
+    {
+        "id": 11,
+        "name": "PM Kisan",
+        "category": "Agriculture",
+        "description": "PM-KISAN farmer registration and beneficiary services.",
+        "keywords": [
+            "farmer",
+            "kisan",
+            "pm kisan",
+            "agriculture"
+        ],
+        "documents": [
+            "Identity information",
+            "Farmer or land details",
+            "Bank details as applicable"
+        ],
+        "steps": [
+            "Visit the official PM-KISAN portal.",
+            "Choose the required farmer service.",
+            "Enter the requested details.",
+            "Submit or check beneficiary status."
+        ],
+        "official_url": "https://pmkisan.gov.in/"
+    },
 
-  {
-    "id": 12,
-    "name": "Tamil Nadu e-Sevai",
-    "category": "Tamil Nadu",
-    "description": "Access multiple Tamil Nadu government citizen services.",
-    "keywords": [
-      "esevai",
-      "e sevai",
-      "tamil nadu",
-      "certificate",
-      "government service"
-    ],
-    "documents": [
-      "Documents depend on the selected service"
-    ],
-    "steps": [
-      "Visit the Tamil Nadu e-Sevai portal.",
-      "Find the required service.",
-      "Check the service requirements.",
-      "Complete the application process."
-    ],
-    "official_url": "https://www.tnesevai.tn.gov.in/"
-  }
-    ]
+    {
+        "id": 12,
+        "name": "Tamil Nadu e-Sevai",
+        "category": "Tamil Nadu",
+        "description": "Access multiple Tamil Nadu government citizen services.",
+        "keywords": [
+            "esevai",
+            "e sevai",
+            "tamil nadu",
+            "certificate",
+            "government service"
+        ],
+        "documents": [
+            "Documents depend on the selected service"
+        ],
+        "steps": [
+            "Visit the Tamil Nadu e-Sevai portal.",
+            "Find the required service.",
+            "Check the service requirements.",
+            "Complete the application process."
+        ],
+        "official_url": "https://www.tnesevai.tn.gov.in/"
+    }
+]

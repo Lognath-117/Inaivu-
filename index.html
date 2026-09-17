@@ -1,354 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+    <meta name="description"
+          content="Inaivu - Intelligent Government Service Assistant">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <title>Inaivu | Government Service Assistant</title>
 
-<title>INAIVU | Government Service Assistant</title>
-
-<link rel="stylesheet" href="/style.css">
-
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-<header>
+<!-- ================= HEADER ================= -->
 
-<div class="logo">
+<header class="navbar">
 
-<div class="logo-icon">I</div>
+    <div class="brand">
 
-<div>
+        <div class="brand-logo">
+            I
+        </div>
 
-<h2>INAIVU</h2>
+        <div class="brand-text">
+            <h2>INAIVU</h2>
+            <span>Government Service Assistant</span>
+        </div>
 
-<p>Government Service Assistant</p>
+    </div>
 
-</div>
+    <div class="nav-actions">
 
-</div>
+        <button
+            class="nav-button"
+            id="languageButton">
+            தமிழ்
+        </button>
 
-<div>
+        <button
+            class="nav-button voice-button"
+            id="topVoiceButton">
+            🎙 Voice
+        </button>
 
-<button onclick="toggleLanguage()" id="languageBtn">
-தமிழ்
-</button>
-
-<button onclick="startVoice()">
-🎙 Voice
-</button>
-
-</div>
+    </div>
 
 </header>
 
 
+<!-- ================= HERO ================= -->
+
+<main>
+
 <section class="hero">
 
-<div class="hero-text">
+    <div class="hero-content">
 
-<p class="small-title">
-ONE PLATFORM • MANY SERVICES
-</p>
+        <div class="eyebrow">
+            ONE PLATFORM • MANY SERVICES
+        </div>
 
-<h1 id="mainTitle">
-Government services,<br>
-made simpler.
-</h1>
+        <h1 id="heroTitle">
+            Government services,
+            <br>
+            made simpler.
+        </h1>
 
-<p id="mainDescription">
+        <p id="heroDescription">
 
-Tell INAIVU what you need.
+            Tell Inaivu what you need.
+            Find the relevant government service,
+            understand the process and visit the
+            official government portal.
 
-Find the relevant government service,
-understand the process and visit the
-official government portal.
+        </p>
 
-</p>
+        <div class="trust-list">
 
-<div class="features">
+            <span>✓ Official Links</span>
 
-<span>✓ Official Links</span>
+            <span>✓ Simple Guidance</span>
 
-<span>✓ Simple Guidance</span>
+            <span>✓ Voice Search</span>
 
-<span>✓ Voice Search</span>
+        </div>
 
-</div>
-
-</div>
-
-
-<div class="search-panel">
-
-<h3 id="question">
-What government service do you need?
-</h3>
-
-<div class="search-box">
-
-<input
-id="searchInput"
-placeholder="Example: I need a driving licence">
-
-<button onclick="startVoice()">
-🎙
-</button>
-
-<button
-class="search-button"
-onclick="searchServices()">
-
-Search
-
-</button>
-
-</div>
-
-<p id="voiceStatus">
-You can type or speak your requirement.
-</p>
+    </div>
 
 
-<div class="quick">
+    <!-- SEARCH CARD -->
 
-<button onclick="quickSearch('driving licence')">
-Driving Licence
-</button>
+    <div class="search-card">
 
-<button onclick="quickSearch('aadhaar')">
-Aadhaar
-</button>
+        <h3 id="searchQuestion">
+            What government service do you need?
+        </h3>
 
-<button onclick="quickSearch('scholarship')">
-Scholarship
-</button>
+        <div class="search-container">
 
-<button onclick="quickSearch('ration card')">
-Ration Card
-</button>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Example: I need a driving licence"
+                autocomplete="off">
 
-</div>
+            <button
+                class="mic-button"
+                id="micButton"
+                title="Voice search">
 
-</div>
+                🎙
+
+            </button>
+
+            <button
+                class="search-button"
+                id="searchButton">
+
+                Search
+
+            </button>
+
+        </div>
+
+        <p
+            class="voice-status"
+            id="voiceStatus">
+
+            You can type or speak your requirement.
+
+        </p>
+
+
+        <div class="quick-search">
+
+            <button data-query="driving licence">
+                Driving Licence
+            </button>
+
+            <button data-query="aadhaar">
+                Aadhaar
+            </button>
+
+            <button data-query="scholarship">
+                Scholarship
+            </button>
+
+            <button data-query="ration card">
+                Ration Card
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+<!-- ================= SERVICES ================= -->
 
 <section class="services-section">
 
-<div class="service-heading">
+    <div class="section-header">
 
-<div>
+        <div>
 
-<p class="small-title">
-SERVICE DIRECTORY
-</p>
+            <div class="eyebrow">
+                SERVICE DIRECTORY
+            </div>
 
-<h2>
-Explore Government Services
-</h2>
+            <h2 id="servicesTitle">
+                Explore Government Services
+            </h2>
 
-</div>
-
-<select
-id="category"
-onchange="searchServices()">
-
-<option>All</option>
-
-</select>
-
-</div>
+        </div>
 
 
-<div
-id="services"
-class="service-grid">
+        <div class="filters">
 
-</div>
+            <select id="categorySelect">
 
-<div
-id="noResults"
-class="no-results">
+                <option value="All">
+                    All Services
+                </option>
 
-<h3>No services found</h3>
+            </select>
 
-<p>
-Try searching for Aadhaar, PAN,
-licence, passport or scholarship.
-</p>
+            <button
+                id="allServicesButton"
+                class="all-button">
 
-</div>
+                All
 
-</section>
+            </button>
 
+        </div>
 
-<section class="how">
-
-<p class="small-title">
-HOW INAIVU WORKS
-</p>
-
-<h2>
-Three Simple Steps
-</h2>
+    </div>
 
 
-<div class="steps">
+    <div
+        id="servicesGrid"
+        class="services-grid">
 
-<div>
-
-<span>01</span>
-
-<h3>Tell Your Need</h3>
-
-<p>
-Type or speak the government
-service you are looking for.
-</p>
-
-</div>
+    </div>
 
 
-<div>
+    <div
+        id="emptyState"
+        class="empty-state">
 
-<span>02</span>
+        <div class="empty-icon">
+            🔎
+        </div>
 
-<h3>Get Guidance</h3>
+        <h3>
+            No matching service
+        </h3>
 
-<p>
-INAIVU shows the documents
-and steps required.
-</p>
+        <p>
+            Try searching for Aadhaar, PAN,
+            licence, passport or scholarship.
+        </p>
 
-</div>
-
-
-<div>
-
-<span>03</span>
-
-<h3>Visit Official Portal</h3>
-
-<p>
-Continue through the official
-government website.
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
+<!-- ================= HOW IT WORKS ================= -->
+
+<section class="how-section">
+
+    <div class="eyebrow">
+        HOW INAIVU WORKS
+    </div>
+
+    <h2>
+        Three Simple Steps
+    </h2>
+
+
+    <div class="how-grid">
+
+        <div class="how-card">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Tell Your Need
+            </h3>
+
+            <p>
+                Type or speak the government
+                service you are looking for.
+            </p>
+
+        </div>
+
+
+        <div class="how-card">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Get Guidance
+            </h3>
+
+            <p>
+                Inaivu shows the relevant documents
+                and step-by-step process.
+            </p>
+
+        </div>
+
+
+        <div class="how-card">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Visit Official Portal
+            </h3>
+
+            <p>
+                Continue your application through
+                the official government website.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= MODAL ================= -->
+
 <div
-id="modal"
-class="modal">
+    class="modal"
+    id="serviceModal">
 
-<div class="modal-content">
-
-<button
-class="close"
-onclick="closeModal()">
-
-×
-
-</button>
-
-<p
-id="modalCategory"
-class="category-label">
-
-</p>
-
-<h2 id="modalTitle"></h2>
-
-<p
-id="modalDescription"
-class="description">
-
-</p>
+    <div
+        class="modal-overlay"
+        id="modalOverlay">
+    </div>
 
 
-<div class="modal-grid">
+    <div class="modal-box">
 
-<div>
+        <button
+            class="close-button"
+            id="closeButton">
 
-<h3>
-Required Documents
-</h3>
+            ×
 
-<ul id="documents"></ul>
+        </button>
+
+
+        <div class="modal-label">
+            <span id="modalCategory"></span>
+            <span class="official-label">
+                OFFICIAL PORTAL
+            </span>
+        </div>
+
+
+        <h2 id="modalTitle"></h2>
+
+        <p
+            id="modalDescription"
+            class="modal-description">
+        </p>
+
+
+        <div class="details-grid">
+
+
+            <div class="details-column">
+
+                <h3>
+                    📋 Required Documents
+                </h3>
+
+                <ul id="documentsList">
+                </ul>
+
+            </div>
+
+
+            <div class="details-column">
+
+                <h3>
+                    📝 Application Steps
+                </h3>
+
+                <ol id="stepsList">
+                </ol>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <a
+                id="officialLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="official-button">
+
+                Open Official Website ↗
+
+            </a>
+
+
+            <button
+                id="speakButton"
+                class="secondary-button">
+
+                🔊 Read Aloud
+
+            </button>
+
+
+            <button
+                id="shareButton"
+                class="secondary-button">
+
+                ↗ Share
+
+            </button>
+
+        </div>
+
+
+        <p class="modal-warning">
+
+            Information and requirements may change.
+            Always verify the latest details on the
+            official government website.
+
+        </p>
+
+    </div>
 
 </div>
 
 
-<div>
-
-<h3>
-Application Steps
-</h3>
-
-<ol id="steps"></ol>
-
-</div>
-
-</div>
-
-
-<div class="modal-buttons">
-
-<a
-id="officialLink"
-target="_blank">
-
-Open Official Website ↗
-
-</a>
-
-<button onclick="speakService()">
-🔊 Read Aloud
-</button>
-
-<button onclick="shareService()">
-Share
-</button>
-
-</div>
-
-
-<p class="warning">
-
-Government requirements may change.
-Always verify the latest information
-on the official website.
-
-</p>
-
-</div>
-
-</div>
-
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-<strong>INAIVU</strong>
+    <div>
+        <strong>INAIVU</strong>
+        <span>
+            Government Service Assistant
+        </span>
+    </div>
 
-<p>
-Government Service Assistant
-</p>
+    <p>
+        HTML · CSS · JavaScript
+    </p>
 
 </footer>
 
 
-<script src="/script.js"></script>
+<script src="./script.js"></script>
 
 </body>
-
 </html>
